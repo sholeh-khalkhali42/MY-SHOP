@@ -1,216 +1,75 @@
 MY-SHOP
-A modern React e-commerce web application with Redux Toolkit state management, JWT authentication, and full CRUD functionality for products, cart, orders, and user management. Designed with Bootstrap and slick-carousel for a responsive, user-friendly interface.
-
-Table of Contents
-Project Overview
+A modern e-commerce React application with user authentication, product browsing, cart management, and order processing.
 
 Features
+User authentication (login and registration) using a mock API
 
-Technologies Used
+Private routes to protect user-specific pages
 
-Getting Started
+Fetching and displaying products from a public fake products API
 
-Project Structure
+Shopping cart with add/remove/update quantity functionality
+
+Order placement and history tracking
+
+Responsive UI with Bootstrap and Slick Carousel
+
+State management with Redux Toolkit
+
+Technologies
+React 18 with Hooks and functional components
+
+Redux Toolkit for state management
+
+React Router v6 for routing and private routes
+
+Bootstrap 5 for styling and responsive design
+
+Slick Carousel for product sliders
+
+Formik and Yup for form handling and validation
+
+Axios for HTTP requests
 
 API Integration
+This project uses the following public APIs:
 
-Authentication
+Authentication API
 
-State Management
+Endpoint: https://reqres.in/api/login
 
-Routing
+Used for user login. Accepts email and password, returns a JWT token on success.
 
-Styling
+This token is stored in Redux and used to protect private routes.
 
-Available Scripts
+Products API
 
-Contributing
+Endpoint: https://fakestoreapi.com/products
 
-License
+Provides a list of realistic fake products with details such as title, price, description, category, and image URLs.
 
-Project Overview
-MY-SHOP is an e-commerce frontend built with React and Redux Toolkit. It supports user registration, login, product browsing, detailed product pages, shopping cart, checkout process, and order management. The app interacts with a REST API to fetch and manage product and user data. It uses JWT tokens for secure user authentication and authorization.
-
-Features
-User registration and login with JWT authentication
-
-Product listing with pagination, filtering, and search
-
-Product detail pages with images and descriptions
-
-Shopping cart with add/remove and quantity update
-
-Secure checkout and order placement
-
-Protected routes for authenticated user areas (profile, checkout)
-
-Responsive design using Bootstrap and slick-carousel
-
-State management with Redux Toolkit and slices
-
-Clean project structure with React Router for navigation
-
-Technologies Used
-React 18+
-
-Redux Toolkit (RTK) for state management
-
-React Router v6 for routing
-
-Bootstrap 5 for responsive styling
-
-slick-carousel for product sliders
-
-Axios or fetch for API calls
-
-JSON Web Tokens (JWT) for authentication
-
-Vite as the build tool
-
-Getting Started
-Prerequisites
-Node.js (v16 or higher recommended)
-
-npm or yarn package manager
-
-Installation
-Clone the repository:
-
-bash
-Copy
-Edit
-git clone https://github.com/sholeh-khalkhali42/MY-SHOP.git
-cd MY-SHOP
-Install dependencies:
-
-bash
-Copy
-Edit
-npm install
-# or
-yarn install
-Start the development server:
-
-bash
-Copy
-Edit
-npm run dev
-# or
-yarn dev
-Open your browser at http://localhost:5173 (or the port shown in the console).
+Used to populate the products list and detail pages.
 
 Project Structure
-bash
-Copy
-Edit
-MY-SHOP/
-│
-├── public/                     # Static assets (favicon, images, etc.)
-├── src/
-│   ├── app/
-│   │   └── store.js            # Redux store setup
-│   ├── assets/                 # Images and static files
-│   ├── components/             # Reusable components (Navbar, Footer, PrivateRoute, Layout)
-│   ├── features/               # Redux slices (authSlice, productsSlice, cartSlice, orderSlice)
-│   ├── pages/                  # Page components (Home, Login, Register, Profile, Products, Cart, Checkout)
-│   ├── routes/
-│   │   └── router.jsx          # React Router setup
-│   ├── index.css               # Global CSS
-│   └── main.jsx                # Entry point rendering the app
-│
-├── .env                       # Environment variables (API URLs, keys)
-├── package.json
-├── vite.config.js
-└── README.md
-API Integration
-This project connects to a backend REST API for data operations. The backend provides endpoints for:
+src/app — Redux store configuration
 
-User authentication:
+src/features — Redux slices for authentication, products, cart, and orders
 
-POST /auth/register for user registration
+src/components — Reusable UI components like Navbar, Footer, PrivateRoute, AppLayout
 
-POST /auth/login for user login
+src/pages — Page components: Home, Login, Register, Products, ProductDetail, Cart, Checkout, Profile, Payment
 
-Products:
+src/routes — Application routing setup with public and private routes
 
-GET /products to fetch all products
+Getting Started
+Clone the repository
 
-GET /products/:id to fetch product details
+Run npm install to install dependencies
 
-Orders:
+Run npm run dev to start the development server
 
-POST /orders to place new orders
+Open http://localhost:3000 in your browser
+## Contact
 
-GET /orders to fetch user orders
-
-Cart:
-
-Cart is managed locally on the frontend via Redux state.
-
-Authentication
-Uses JWT tokens for secure authentication.
-
-After login, the JWT token is stored in Redux state.
-
-Protected routes use a <PrivateRoute> component that redirects unauthenticated users to the login page.
-
-API requests requiring authentication send the JWT token in the Authorization header:
-
-makefile
-Copy
-Edit
-Authorization: Bearer <token>
-State Management
-Utilizes Redux Toolkit with slices for modular state management.
-
-Key slices include:
-
-authSlice: handles user authentication and token management
-
-productsSlice: manages product data and fetching status
-
-cartSlice: manages shopping cart items and quantities
-
-orderSlice: handles order creation and order history
-
-Routing
-Uses React Router v6 for client-side routing.
-
-Routes are nested inside a main AppLayout component which includes Navbar and Footer.
-
-Private routes are protected with a <PrivateRoute> wrapper.
-
-Styling
-Uses Bootstrap 5 for responsive layout and components.
-
-Incorporates slick-carousel for product image sliders and carousels.
-
-Custom styles are written in CSS modules or global CSS files like index.css.
-
-Available Scripts
-npm run dev or yarn dev: Start development server
-
-npm run build or yarn build: Create production build
-
-npm run preview or yarn preview: Preview production build locally
-
-Contributing
-Contributions are welcome! Please follow these steps:
-
-Fork the repository
-
-Create a new branch (git checkout -b feature/your-feature)
-
-Make your changes and commit them (git commit -m "Add feature")
-
-Push to the branch (git push origin feature/your-feature)
-
-Open a Pull Request
-
-License
-This project is licensed under the MIT License.
-Contact
-For any questions or inquiries, you can reach me on LinkedIn:
-
-https://www.linkedin.com/in/sholeh-khalkhali
-
+For questions or collaboration, find me on LinkedIn:  
+[https://www.linkedin.com/in/sholeh-khalkhali](https://www.linkedin.com/in/sholeh-khalkhali)
