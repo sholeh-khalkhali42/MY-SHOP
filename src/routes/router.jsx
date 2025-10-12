@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -10,17 +10,17 @@ import {
 // Layout
 import AppLayout from '../components/AppLayout';
 
-// Pages
-import Home from '../pages/Home';
-import ProductsPage from '../features/products/ProductsPage';
-import ProductDetailPage from '../features/products/ProductDetailPage';
-import CartPage from '../features/cart/CartPage';
-import LoginPage from '../pages/LoginPage';
-import RegisterPage from '../pages/RegisterPage';
-import ProfilePage from '../pages/ProfilePage';
-import PrivateRoute from '../components/privateRoute';
-import CheckoutPage from '../pages/CheckoutPage';
-import PaymentPage from '../pages/PaymentPage';
+// Lazy loaded Pages
+const Home = lazy(() => import('../pages/Home'));
+const ProductsPage = lazy(() => import('../features/products/ProductsPage'));
+const ProductDetailPage = lazy(() => import('../features/products/ProductDetailPage'));
+const CartPage = lazy(() => import('../features/cart/CartPage'));
+const LoginPage = lazy(() => import('../pages/LoginPage'));
+const RegisterPage = lazy(() => import('../pages/RegisterPage'));
+const ProfilePage = lazy(() => import('../pages/ProfilePage'));
+const CheckoutPage = lazy(() => import('../pages/CheckoutPage'));
+const PaymentPage = lazy(() => import('../pages/PaymentPage'));
+const PrivateRoute = lazy(() => import('../components/privateRoute'));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -56,5 +56,9 @@ const router = createBrowserRouter(
 );
 
 export default function AppRouter() {
-  return <RouterProvider router={router} />;
+  return (
+    <Suspense fallback={<div className="flex justify-center items-center min-h-screen">Loading...</div>}>
+      <RouterProvider router={router} />
+    </Suspense>
+  );
 }

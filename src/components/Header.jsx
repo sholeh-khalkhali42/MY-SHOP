@@ -12,34 +12,34 @@ const Header = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container">
-        <Link className="navbar-brand" to="/">MyShop</Link>
-        <div className="collapse navbar-collapse">
-          <ul className="navbar-nav me-auto">
-            <li className="nav-item">
-              <NavLink to="/" className="nav-link" end>خانه</NavLink>
+    <nav className="bg-white shadow-md">
+      <div className="max-w-7xl mx-auto px-4">
+        <Link className="text-xl font-bold" to="/">MyShop</Link>
+        <div className="flex justify-between items-center">
+          <ul className="flex space-x-4">
+            <li>
+              <NavLink to="/" className="text-gray-700 hover:text-blue-500" end>خانه</NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink to="/store" className="nav-link">فروشگاه</NavLink>
+            <li>
+              <NavLink to="/store" className="text-gray-700 hover:text-blue-500">فروشگاه</NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink to="/cart" className="nav-link">سبد خرید</NavLink>
+            <li>
+              <NavLink to="/cart" className="text-gray-700 hover:text-blue-500">سبد خرید</NavLink>
             </li>
           </ul>
-          <ul className="navbar-nav ms-auto">
+          <ul className="flex space-x-4">
             {isLoggedIn ? (
               <>
-                <li className="nav-item">
-                  <span className="nav-link">سلام، {user.name}</span>
+                <li>
+                  <span className="text-gray-700">سلام، {user.name}</span>
                 </li>
-                <li className="nav-item">
-                  <button className="btn btn-link nav-link" onClick={handleLogout}>خروج</button>
+                <li>
+                  <button className="bg-transparent text-gray-700 hover:text-blue-500" onClick={handleLogout}>خروج</button>
                 </li>
               </>
             ) : (
-              <li className="nav-item">
-                <NavLink to="/auth" className="nav-link">ورود / ثبت‌نام</NavLink>
+              <li>
+                <NavLink to="/auth" className="text-gray-700 hover:text-blue-500">ورود / ثبت‌نام</NavLink>
               </li>
             )}
           </ul>

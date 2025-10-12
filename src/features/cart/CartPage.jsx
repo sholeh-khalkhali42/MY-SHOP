@@ -16,60 +16,60 @@ const CartPage = () => {
 
   if (items.length === 0) {
     return (
-      <div className="container mt-5">
-        <h3>Your cart is empty 😔</h3>
+      <div className="max-w-7xl mx-auto mt-20 px-4">
+        <h3 className="text-xl font-semibold">Your cart is empty 😔</h3>
       </div>
     );
   }
 
   return (
-    <div className="container mt-5">
-      <h2>Your Cart</h2>
-      <div className="table-responsive mt-3">
-        <table className="table table-bordered table-striped">
-          <thead className="table-dark">
+    <div className="max-w-7xl mx-auto mt-20 px-4">
+      <h2 className="text-2xl font-bold">Your Cart</h2>
+      <div className="overflow-x-auto mt-3">
+        <table className="w-full border-collapse border border-gray-300">
+          <thead className="bg-gray-800 text-white">
             <tr>
-              <th>Image</th>
-              <th>Title</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Total</th>
-              <th>Actions</th>
+              <th className="px-4 py-2 border border-gray-300">Image</th>
+              <th className="px-4 py-2 border border-gray-300">Title</th>
+              <th className="px-4 py-2 border border-gray-300">Price</th>
+              <th className="px-4 py-2 border border-gray-300">Quantity</th>
+              <th className="px-4 py-2 border border-gray-300">Total</th>
+              <th className="px-4 py-2 border border-gray-300">Actions</th>
             </tr>
           </thead>
           <tbody>
             {items.map(item => (
               <tr key={item.id}>
-                <td>
+                <td className="px-4 py-2 border border-gray-300">
                   <img
                     src={item.image}
                     alt={item.title}
                     style={{ width: '50px', height: '50px', objectFit: 'contain' }}
                   />
                 </td>
-                <td>{item.title.slice(0, 40)}</td>
-                <td>${item.price.toFixed(2)}</td>
-                <td>
-                  <div className="d-flex align-items-center gap-2">
+                <td className="px-4 py-2 border border-gray-300">{item.title.slice(0, 40)}</td>
+                <td className="px-4 py-2 border border-gray-300">${item.price.toFixed(2)}</td>
+                <td className="px-4 py-2 border border-gray-300">
+                  <div className="flex items-center gap-2">
                     <button
-                      className="btn btn-sm btn-outline-secondary"
+                      className="bg-transparent border border-gray-500 text-gray-500 px-2 py-1 rounded hover:bg-gray-500 hover:text-white text-sm"
                       onClick={() => dispatch(decreaseQuantity(item.id))}
                     >
                       −
                     </button>
                     <span>{item.quantity}</span>
                     <button
-                      className="btn btn-sm btn-outline-secondary"
+                      className="bg-transparent border border-gray-500 text-gray-500 px-2 py-1 rounded hover:bg-gray-500 hover:text-white text-sm"
                       onClick={() => dispatch(increaseQuantity(item.id))}
                     >
                       +
                     </button>
                   </div>
                 </td>
-                <td>${(item.price * item.quantity).toFixed(2)}</td>
-                <td>
+                <td className="px-4 py-2 border border-gray-300">${(item.price * item.quantity).toFixed(2)}</td>
+                <td className="px-4 py-2 border border-gray-300">
                   <button
-                    className="btn btn-danger btn-sm"
+                    className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 text-sm"
                     onClick={() => dispatch(removeFromCart(item.id))}
                   >
                     Remove
@@ -80,8 +80,8 @@ const CartPage = () => {
           </tbody>
         </table>
       </div>
-      <h4 className="mt-3">Total: ${totalPrice}</h4>
-      <Link to="/checkout" className="btn btn-success mt-3">
+      <h4 className="text-lg font-semibold mt-3">Total: ${totalPrice}</h4>
+      <Link to="/checkout" className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 mt-3 inline-block">
   Proceed to Checkout
 </Link>
     </div>
