@@ -7,14 +7,15 @@ import Navbar from './Navbar';
 
 const AppLayout = () => {
   return (
-    <div className="d-flex flex-column min-vh-100">
+    <div className="flex flex-col min-h-screen">
 <Navbar/>
-      <main className="flex-grow-1">
+      <main className="flex-grow pb-16">
         <Outlet />
+      
       </main>
       <Footer />
     </div>
   );
 };
 
-export default AppLayout;
+export default React.memo(AppLayout);

@@ -31,24 +31,24 @@ const CheckoutPage = () => {
 
 
   return (
-    <div className="container mt-5">
-      <h2>Checkout</h2>
+    <div className="max-w-4xl mx-auto mt-20 px-4">
+      <h2 className="text-2xl font-bold">Checkout</h2>
       <p>Review your order before proceeding to payment:</p>
 
-      <ul className="list-group mb-4">
+      <ul className="space-y-2 mb-4">
         {cartItems.map(item => (
-          <li key={item.id} className="list-group-item d-flex justify-content-between">
+          <li key={item.id} className="bg-white p-4 rounded shadow flex justify-between items-center">
             <span>Title:{item.title} (x{item.quantity})</span>
             <span>${(item.price * item.quantity).toFixed(2)}</span>
           </li>
         ))}
-        <li className="list-group-item d-flex justify-content-between fw-bold">
+        <li className="bg-white p-4 rounded shadow flex justify-between items-center font-bold">
           <span>Total</span>
           <span>${totalPrice}</span>
         </li>
       </ul>
 
-      <button className="btn btn-primary" onClick={handleConfirm}>
+      <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onClick={handleConfirm}>
         Confirm and Pay
       </button>
     </div>

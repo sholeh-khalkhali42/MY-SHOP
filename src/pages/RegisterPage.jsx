@@ -23,8 +23,8 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="container  mt-5" style={{ maxWidth: '400px' }}>
-      <h2 className='mb-3 '>Register</h2>
+    <div className="max-w-md mx-auto mt-20 px-4">
+      <h2 className="text-2xl font-bold mb-4">Register</h2>
       <Formik
         initialValues={{ email: '', password: '' }}
         validationSchema={Yup.object({
@@ -34,20 +34,20 @@ const RegisterPage = () => {
         onSubmit={handleSubmit}
       >
         <Form>
-          <div>
-         <label htmlFor="email" className="form-label">Email</label>
-            <Field name="email" type="email" className="form-control" />
-           <ErrorMessage name="email" component="div" className="text-danger small" />
+          <div className="mb-4">
+         <label htmlFor="email" className="text-sm font-medium text-gray-700">Email</label>
+            <Field name="email" type="email" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+           <ErrorMessage name="email" component="div" className="text-red-500 text-sm" />
           </div>
-          <div>
-          <label htmlFor="password" className="form-label">Password</label>
-            <Field name="password" type="password" className="form-control" />
-           <ErrorMessage name="password" component="div" className="text-danger small" />
+          <div className="mb-4">
+          <label htmlFor="password" className="text-sm font-medium text-gray-700">Password</label>
+            <Field name="password" type="password" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+           <ErrorMessage name="password" component="div" className="text-red-500 text-sm" />
           </div>
-          {status === 'loading' && <div className="text-info mb-2">Registering...</div>}
-          {error && <div className="text-danger mb-2">{error}</div>}
-          <button className="btn btn-primary mt-3" type="submit">Register</button>
-           <p className="text-info mb-2">For test :email: eve.holt@reqres.in , password: pistol</p>
+          {status === 'loading' && <div className="text-blue-500 mb-2">Registering...</div>}
+          {error && <div className="text-red-500 mb-2">{error}</div>}
+          <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-3" type="submit">Register</button>
+           <p className="text-blue-500 mb-2">For test :email: eve.holt@reqres.in , password: pistol</p>
         </Form>
       </Formik>
     </div>

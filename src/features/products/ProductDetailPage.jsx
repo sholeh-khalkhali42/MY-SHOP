@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
 import { addToCart } from '../cart/cartSlice';
 import { useDispatch } from 'react-redux';
 import { useLocation,useNavigate } from 'react-router-dom';
@@ -22,53 +21,53 @@ const previousPage = location.state?.from || '/products';
     navigate(previousPage);
   };
 
-  if (!product) return <p className="text-center mt-5">Loading...</p>;
+  if (!product) return <p className="text-center mt-20">Loading...</p>;
 
   const handleAddToCart = () => {
     dispatch(addToCart(product));
   };
 
   return (
-    <div className="container mt-5">
-      <Button variant="outline-secondary" className="mb-4" onClick={handleGoBack}>
+    <div className="max-w-7xl mx-auto mt-20 px-4">
+      <button className="bg-transparent border border-gray-500 text-gray-500 px-4 py-2 rounded hover:bg-gray-500 hover:text-white mb-4" onClick={handleGoBack}>
         ← Back
-      </Button>
-      <div className="row align-items-start">
+      </button>
+      <div className="flex flex-col md:flex-row gap-8">
         {/* Product Image */}
-        <div className="col-md-6">
-          <div className="bg-light p-4 rounded shadow-sm">
+        <div className="w-full md:w-1/2">
+          <div className="bg-gray-100 p-4 rounded shadow">
             <img
               src={product.image}
               alt={product.title}
-              className="img-fluid"
+              className="w-full h-auto"
               style={{ maxHeight: '450px', objectFit: 'contain' }}
             />
           </div>
         </div>
 
         {/* Product Info */}
-        <div className="col-md-6">
-          <h2 className="fw-bold mb-3">{product.title}</h2>
-          <p className="text-muted mb-4">{product.category.toUpperCase()}</p>
-          <h3 className="text-danger">${product.price}</h3>
+        <div className="w-full md:w-1/2">
+          <h2 className="font-bold mb-3">{product.title}</h2>
+          <p className="text-gray-600 mb-4">{product.category.toUpperCase()}</p>
+          <h3 className="text-red-600">${product.price}</h3>
           <p className="mt-4">{product.description}</p>
 
           {/* Sample Color Select */}
           <div className="mb-3">
             <strong>Color:</strong>
-            <div className="d-flex gap-2 mt-2">
-              <div className="rounded-circle bg-primary" style={{ width: 25, height: 25 }}></div>
-              <div className="rounded-circle bg-secondary" style={{ width: 25, height: 25 }}></div>
-              <div className="rounded-circle bg-dark" style={{ width: 25, height: 25 }}></div>
+            <div className="flex gap-2 mt-2">
+              <div className="rounded-full bg-blue-500 w-6 h-6"></div>
+              <div className="rounded-full bg-gray-500 w-6 h-6"></div>
+              <div className="rounded-full bg-black w-6 h-6"></div>
             </div>
           </div>
 
-        
-          <Button className="mt-3 px-4 py-2"
+
+          <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-3"
                                  onClick={handleAddToCart }
                                >
                                Add to Cart
-          </Button>
+          </button>
         </div>
       </div>
     </div>

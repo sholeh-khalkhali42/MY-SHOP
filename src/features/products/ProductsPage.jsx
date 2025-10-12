@@ -63,20 +63,26 @@ const ProductsPage = () => {
 
   const renderPagination = () => (
     <nav className="mt-4">
-      <ul className="pagination justify-content-center">
+      <div className="flex justify-center space-x-2">
         {Array.from({ length: totalPages }, (_, i) => (
-          <li key={i + 1} className={`page-item ${currentPage === i + 1 ? 'active' : ''}`}>
-            <button className="page-link" onClick={() => handlePageChange(i + 1)}>
-              {i + 1}
-            </button>
-          </li>
+          <button
+            key={i + 1}
+            className={`px-3 py-2 rounded ${
+              currentPage === i + 1
+                ? 'bg-blue-500 text-white'
+                : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-300'
+            }`}
+            onClick={() => handlePageChange(i + 1)}
+          >
+            {i + 1}
+          </button>
         ))}
-      </ul>
+      </div>
     </nav>
   );
 
   return (
-    <div className="container mt-5">
+    <div className="max-w-7xl mx-auto mt-20 px-4">
      <Helmet>
         <title>Products | My Online Store</title>
         <meta
@@ -84,31 +90,33 @@ const ProductsPage = () => {
           content="Browse our wide selection of quality products. Filter by category and price to find exactly what you're looking for."
         />
       </Helmet>
-      <h2 className="mb-4">Featured Products</h2>
+      <h2 className="mb-4 text-2xl font-bold">Featured Products</h2>
       {loading ? (
         <p>Loading...</p>
       ) : (
         <Slider {...sliderSettings}>
           {featuredProducts.map(product => (
             <div key={product.id} className="px-2">
-              <div className="card h-100 border-primary shadow-sm" style={{ cursor: 'pointer' }}>
+              <div className="bg-white rounded-lg shadow-md border border-blue-500 h-full flex flex-col cursor-pointer">
                 <img
                   src={product.image}
                   alt={product.title}
-                  className="card-img-top p-3"
-                  style={{ height: '180px', objectFit: 'contain', transition: 'transform 0.3s' }}
+                  className="w-full h-48 object-contain p-4"
+                  style={{ transition: 'transform 0.3s' }}
                   onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.1)'}
                   onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
                 />
-                <div className="card-body">
-                  <h6 className="card-title">{product.title.slice(0, 50)}</h6>
-                  <p className="text-primary fw-bold">{product.price} $</p>
-                  <button
-                    className="btn btn-outline-primary btn-sm w-100"
-                    onClick={() => dispatch(addToCart(product))}
-                  >
-                    Add to Cart
-                  </button>
+                <div className="p-4 flex flex-col flex-1">
+                  <h6 className="text-lg font-semibold min-h-[3rem]">{product.title.slice(0, 50)}</h6>
+                  <p className="text-blue-600 font-bold">{product.price} $</p>
+                  <div className="mt-auto">
+                    <button
+                      className="bg-transparent border border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-500 hover:text-white text-sm w-full"
+                      onClick={() => dispatch(addToCart(product))}
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -116,19 +124,18 @@ const ProductsPage = () => {
         </Slider>
       )}
 
-      <hr className="my-5" />
+      <div className="border-t border-gray-300 my-20" />
 
-      
 {/* Filters */}
-<div className="row mb-4">
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
   {/* Category Filter */}
-  <div className="col-md-4">
-    <label htmlFor="categorySelect" className="form-label">
+  <div>
+    <label htmlFor="categorySelect" className="text-sm font-medium text-gray-700">
       Filter by Category:
     </label>
     <select
       id="categorySelect"
-      className="form-select"
+      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
       value={selectedCategory}
       onChange={e => {
         setSelectedCategory(e.target.value);
@@ -145,14 +152,14 @@ const ProductsPage = () => {
   </div>
 
   {/* Max Price Filter */}
-  <div className="col-md-4">
-    <label htmlFor="maxPriceInput" className="form-label">
+  <div>
+    <label htmlFor="maxPriceInput" className="text-sm font-medium text-gray-700">
       Max Price:
     </label>
     <input
       id="maxPriceInput"
       type="number"
-      className="form-control"
+      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
       value={maxPrice}
       onChange={e => {
         setMaxPrice(e.target.value);
@@ -164,73 +171,67 @@ const ProductsPage = () => {
   </div>
 
   {/* Search Bar */}
-  <div className="col-md-4">
-    <label htmlFor="searchInput" className="form-label">
+  <div>
+    <label htmlFor="searchInput" className="text-sm font-medium text-gray-700">
       Search:
     </label>
     <form
-      className="row g-2"
+      className="flex gap-2"
       onSubmit={e => {
         e.preventDefault();
         setCurrentPage(1);
       }}
     >
-      <div className="col-12 col-md-10">
-        <input
-          id="searchInput"
-          type="text"
-          className="form-control"
-          placeholder="Search products..."
-          value={searchTerm}
-          onChange={e => setSearchTerm(e.target.value)}
-        />
-      </div>
+      <input
+        id="searchInput"
+        type="text"
+        className="w-full md:w-5/6 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Search products..."
+        value={searchTerm}
+        onChange={e => setSearchTerm(e.target.value)}
+      />
 
-      <div className="col-12 col-md-2">
-        <button
-          type="submit"
-          className="btn btn-dark btn-sm w-100 d-flex align-items-center justify-content-center"
-          aria-label="Search"
-        >
-          <i className="bi bi-search mt-1"></i>
-        </button>
-      </div>
+      <button
+        type="submit"
+        className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-900 text-sm w-full md:w-1/6 flex items-center justify-center"
+        aria-label="Search"
+      >
+        Search
+      </button>
     </form>
   </div>
 </div>
 
-      <h2>All Products</h2>
+      <h2 className="text-2xl font-bold">All Products</h2>
       {loading ? (
         <p>Loading...</p>
       ) : currentProducts.length === 0 ? (
         <p className="text-center mt-4">No products match your filters.</p>
       ) : (
         <>
-          <div className="row">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {currentProducts.map(product => (
-              <div key={product.id} className="col-md-3 mb-4">
-                <div className="card h-100 shadow-sm">
-                  <img
-                    src={product.image}
-                    className="card-img-top p-3"
-                    style={{ height: '200px', objectFit: 'contain', transition: 'transform 0.3s' }}
-                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
-                    onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-                  />
-                  <div className="card-body d-flex flex-column">
-                    <h6>{product.title.slice(0, 50)}</h6>
-                    <p className="text-success fw-bold">{product.price} $</p>
-                    <div className="mt-auto d-flex flex-column gap-2">
-                      <Link to={`/product/${product.id}`} className="btn btn-outline-dark btn-sm">
-                        Details
-                      </Link>
-                      <button
-                        className="btn btn-primary btn-sm"
-                        onClick={() => dispatch(addToCart(product))}
-                      >
-                        Add to Cart
-                      </button>
-                    </div>
+              <div key={product.id} className="bg-white rounded-lg shadow-md h-full">
+                <img
+                  src={product.image}
+                  className="w-full h-48 object-contain p-4"
+                  style={{ transition: 'transform 0.3s' }}
+                  onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
+                  onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                />
+                <div className="p-4 flex flex-col">
+                  <h6 className="text-lg font-semibold min-h-[3rem]">{product.title.slice(0, 50)}</h6>
+                  <p className="text-green-600 font-bold">{product.price} $</p>
+                  <div className="mt-auto flex flex-col gap-2">
+                    <Link to={`/product/${product.id}`} className="bg-transparent border border-gray-800 text-gray-800 px-4 py-2 rounded hover:bg-gray-800 hover:text-white text-sm text-center">
+                      Details
+                    </Link>
+                    <button
+                      className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-sm"
+                      onClick={() => dispatch(addToCart(product))}
+                    >
+                      Add to Cart
+                    </button>
                   </div>
                 </div>
               </div>
