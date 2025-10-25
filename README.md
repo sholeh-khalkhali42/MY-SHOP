@@ -12,7 +12,7 @@ Shopping cart with add/remove/update quantity functionality
 
 Order placement and history tracking
 
-Responsive UI with Bootstrap and Slick Carousel
+Responsive UI with Tailwind CSS
 
 State management with Redux Toolkit
 
