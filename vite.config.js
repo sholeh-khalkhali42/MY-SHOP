@@ -1,14 +1,13 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+/// <reference types="vitest" />
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  server: {
-    port: 3000, // می‌تونی تغییرش بدی
+  test: {
+    environment: 'jsdom', // یا 'jsdom' اگر خطا ادامه داشت
+    globals: true,
+    isolate: false,
+    setupFiles: './src/setupTests.js', // 👈 این خط حتماً اضافه بشه
   },
-  resolve: {
-    alias: {
-      '@': '/src',  // برای وارد کردن راحت‌تر فایل‌ها
-    },
-  },
-});
+})
