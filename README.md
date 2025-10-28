@@ -1,75 +1,139 @@
-MY-SHOP
-A modern e-commerce React application with user authentication, product browsing, cart management, and order processing.
+# 🛍️ MY-SHOP — Modern React E-Commerce Application
 
-Features
-User authentication (login and registration) using a mock API
 
-Private routes to protect user-specific pages
+[![Vitest Coverage](https://img.shields.io/badge/Coverage-💯-green)](https://github.com/sholeh-khalkhali42/MY-SHOP)
+[![Vercel](https://img.shields.io/badge/Deploy-Vercel-blue)](https://vercel.com/)
 
-Fetching and displaying products from a public fake products API
+**MY-SHOP** is a modern e-commerce application built with **React**, **Redux Toolkit**, and **Formik/Yup**.  
+It includes **unit and integration tests**, with automated **CI/CD deployment via GitHub Actions** defined in `/.github/workflows/main.yml`. The application is automatically deployed to **Vercel** upon successful tests.
 
-Shopping cart with add/remove/update quantity functionality
+---
 
-Order placement and history tracking
+## 📚 Table of Contents
 
-Responsive UI with Tailwind CSS
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Testing](#testing)
+- [Running Tests](#running-tests)
+- [CI/CD Deployment](#cicd-deployment)
+- [Installation and Running](#installation-and-running)
+- [License](#license)
 
-State management with Redux Toolkit
+---
 
-Technologies
-React 18 with Hooks and functional components
+## 🔹 Features
 
-Redux Toolkit for state management
+- User authentication (Login / Register)  
+- Protected routes (Private Routes)  
+- State management with Redux Toolkit  
+- Forms with Formik and validation using Yup  
+- Responsive design (Mobile & Desktop)  
+- **Unit and integration tests** for key pages and components  
+- Automated deployment via GitHub Actions → Vercel  
 
-React Router v6 for routing and private routes
+---
 
-Bootstrap 5 for styling and responsive design
 
-Slick Carousel for product sliders
+✅ Tests are located **next to their respective components/pages** for easier maintenance and better code coverage.
 
-Formik and Yup for form handling and validation
+---
 
-Axios for HTTP requests
+## 🧪 Testing
 
-API Integration
-This project uses the following public APIs:
+The project contains **unit and integration tests** to ensure application stability:
 
-Authentication API
+- **Unit Tests:** Verify individual components such as buttons, forms, and product cards.  
+- **Integration Tests:** Cover critical workflows like **CartPage**, **PrivateRoute**, and **ProductDetailPage** interactions.
 
-Endpoint: https://reqres.in/api/login
+All tests are executed using **Vitest + React Testing Library**.
 
-Used for user login. Accepts email and password, returns a JWT token on success.
+---
 
-This token is stored in Redux and used to protect private routes.
+## ⚙️ Running Tests
 
-Products API
+```bash
+# Run all tests locally
+npm run vitest
 
-Endpoint: https://fakestoreapi.com/products
+# Run tests in CI mode (GitHub Actions)
+npm run vitest -- --ci
 
-Provides a list of realistic fake products with details such as title, price, description, category, and image URLs.
 
-Used to populate the products list and detail pages.
+---
 
-Project Structure
-src/app — Redux store configuration
+🚀 CI/CD Deployment
 
-src/features — Redux slices for authentication, products, cart, and orders
+Workflow path:
 
-src/components — Reusable UI components like Navbar, Footer, PrivateRoute, AppLayout
+.github/workflows/main.yml
 
-src/pages — Page components: Home, Login, Register, Products, ProductDetail, Cart, Checkout, Profile, Payment
+Workflow steps:
 
-src/routes — Application routing setup with public and private routes
+1. Checkout the code
 
-Getting Started
-Clone the repository
 
-Run npm install to install dependencies
+2. Install dependencies (npm install)
 
-Run npm run dev to start the development server
 
-Open http://localhost:3000 in your browser
-## Contact
+3. Run all tests (Unit + Integration) with Vitest
 
-For questions or collaboration, find me on LinkedIn:  
-[https://www.linkedin.com/in/sholeh-khalkhali](https://www.linkedin.com/in/sholeh-khalkhali)
+
+4. Build the project (npm run build)
+
+
+5. Deploy to Vercel if all tests pass
+
+
+
+Example main.yml:
+
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install
+      - run: npm run vitest -- --ci
+      - run: npm run build
+      - uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.ORG_ID }}
+          vercel-project-id: ${{ secrets.PROJECT_ID }}
+
+
+---
+
+💻 Installation and Running
+
+Prerequisites
+
+Node.js ≥ 16
+
+npm or yarn
+
+
+Steps
+
+git clone https://github.com/sholeh-khalkhali42/MY-SHOP.git
+cd MY-SHOP
+npm install
+npm run dev
+
+Open your browser at: http://localhost:3000
+
+
+---
+
+📄 License
+
+MIT License
+Copyright (c) 2025
+Permission is hereby granted, free of charge, to any person obtaining a copy...
