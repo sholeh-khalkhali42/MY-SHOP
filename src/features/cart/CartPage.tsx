@@ -8,16 +8,26 @@ import {
   decreaseQuantity,
 } from './cartSlice';
 
-const CartPage = () => {
-  const dispatch = useDispatch();
-  const items = useSelector(state => state.cart.items);
+interface CartItem {
+  id: string;
+  title: string;
+  price: number;
+  quantity: number;
+  image: string;
+}
 
-  const totalPrice = items.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+
+const CartPage:React.FC = () => {
+  
+  const dispatch = useDispatch();
+  const items:CartItem[] = useSelector(state => state.cart.items);
+
+  const totalPrice = items.reduce((total: number, item) => total + item.price * item.quantity, 0).toFixed(2);
 
   if (items.length === 0) {
     return (
       <div className="max-w-7xl mx-auto mt-20 px-4">
-        <h3 className="text-xl font-semibold">Your cart is empty 😔</h3>
+        <h3 className="text-xl font-semibold">Your cart is empty</h3>
       </div>
     );
   }

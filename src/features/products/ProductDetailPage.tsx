@@ -3,20 +3,23 @@ import { useParams } from 'react-router-dom';
 import { addToCart } from '../cart/cartSlice';
 import { useDispatch } from 'react-redux';
 import { useLocation,useNavigate } from 'react-router-dom';
+import type { ProductItem } from '../../types/Products'; 
 
 
-const ProductDetailPage = () => {
+
+const ProductDetailPage:React.FC = () => {
     const dispatch = useDispatch();
   const { productId } = useParams();
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState<ProductItem | null>(null);
   const location = useLocation()
   const navigate = useNavigate();
 const previousPage = location.state?.from || '/products';
-  useEffect(() => {
-    fetch(`https://fakestoreapi.com/products/${productId}`)
-      .then(res => res.json())
-      .then(setProduct);
-  }, [productId]);
+ 
+useEffect(() => {
+  fetch(`https://fakestoreapi.com/products/${productId}`)
+    .then(res => res.json())
+    .then((data: ProductItem) => setProduct(data));
+}, [productId]);
    const handleGoBack = () => {
     navigate(previousPage);
   };
@@ -48,7 +51,8 @@ const previousPage = location.state?.from || '/products';
         {/* Product Info */}
         <div className="w-full md:w-1/2">
           <h2 className="font-bold mb-3">{product.title}</h2>
-          <p className="text-gray-600 mb-4">{product.category.toUpperCase()}</p>
+       {product.category && <p className="text-gray-600 mb-4">{product.category.toUpperCase()}</p>}
+
           <h3 className="text-red-600">${product.price}</h3>
           <p className="mt-4">{product.description}</p>
 

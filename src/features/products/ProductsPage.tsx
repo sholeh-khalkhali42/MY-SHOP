@@ -6,13 +6,15 @@ import { addToCart } from '../cart/cartSlice';
 import { Link } from 'react-router-dom';
 import Slider from "react-slick";
 import { Helmet } from 'react-helmet';
+import type { ProductItem } from '../../types/Products';
+import type { RootState, AppDispatch } from '../../app/store';
 
-const ProductsPage = () => {
-  const dispatch = useDispatch();
-  const products = useSelector(selectAllProducts) || [];
-  const loading = useSelector(state => state.products.loading);
+
+const ProductsPage:React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>(); 
+  const products = useSelector((state: RootState) => selectAllProducts(state));
+  const loading = useSelector((state :RootState)=> state.products.loading);
   const [searchTerm, setSearchTerm] = useState(''); 
-
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [maxPrice, setMaxPrice] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -25,7 +27,7 @@ const ProductsPage = () => {
   const categories = [...new Set(products.map(product => product.category))];
 
   
-  const filteredProducts = products.filter(product => {
+  const filteredProducts: ProductItem[]  = products.filter(product => {
   const categoryMatch = selectedCategory === 'all' || product.category === selectedCategory;
   const priceMatch = !maxPrice || product.price <= parseFloat(maxPrice);
   const searchMatch = product.title.toLowerCase().includes(searchTerm.toLowerCase()); // 🆕 جستجو
@@ -57,7 +59,7 @@ const ProductsPage = () => {
   const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
 
-  const handlePageChange = (pageNumber) => {
+  const handlePageChange = (pageNumber:number) => {
     setCurrentPage(pageNumber);
   };
 

@@ -1,13 +1,21 @@
-// src/features/products/productsSlice.js
+// src/features/products/productsSlice.ts
 import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit';
+import type { RootState } from '../../app/store';
+import type { ProductItem } from '../../types/Products';
 
-const productsAdapter = createEntityAdapter();
+// ✅ Entity Adapter
+const productsAdapter = createEntityAdapter<ProductItem>();
 
-export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
-  const res = await fetch('https://fakestoreapi.com/products');
-  return await res.json();
-});
+// ✅ Async thunk برای fetch محصولات
+export const fetchProducts = createAsyncThunk<ProductItem[]>(
+  'products/fetchProducts',
+  async () => {
+    const res = await fetch('https://fakestoreapi.com/products');
+    return await res.json();
+  }
+);
 
+// ✅ Slice
 const productsSlice = createSlice({
   name: 'products',
   initialState: productsAdapter.getInitialState({
@@ -29,9 +37,10 @@ const productsSlice = createSlice({
   },
 });
 
+// ✅ Selectors
 export const {
   selectAll: selectAllProducts,
   selectById: selectProductById,
-} = productsAdapter.getSelectors((state) => state.products);
+} = productsAdapter.getSelectors((state: RootState) => state.products);
 
 export default productsSlice.reducer;

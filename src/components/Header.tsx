@@ -1,14 +1,18 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logoutUser} from '../features/auth/authSlice';
+import { logout} from '../features/auth/authSlice';
+
+import type { RootState, AppDispatch } from '../app/store';
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { isLoggedIn, user } = useSelector((state) => state.auth);
+ const { token, user } = useSelector((state: RootState) => state.auth);
+const isLoggedIn = Boolean(token);
+
 
   const handleLogout = () => {
-    dispatch(logoutUser());
+    dispatch(logout());
   };
 
   return (

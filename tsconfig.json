@@ -1,0 +1,45 @@
+{
+  // Visit https://aka.ms/tsconfig to read more about this file
+  "compilerOptions": {
+    /* ===== File Layout ===== */
+    // "rootDir": "./src",
+    // "outDir": "./dist",
+
+    /* ===== Environment Settings ===== */
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+
+    /* ===== React ===== */
+    "jsx": "react-jsx",
+
+    /* ===== Type Checking ===== */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* ===== Output Settings ===== */
+    "sourceMap": true,
+    "declaration": false,
+    "declarationMap": false,
+    "noEmit": true,
+
+    /* ===== Compatibility ===== */
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "verbatimModuleSyntax": true,
+    "noUncheckedSideEffectImports": true,
+
+    /* ===== JS Migration Support ===== */
+    "allowJs": true,
+    "checkJs": false
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
